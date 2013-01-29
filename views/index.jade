@@ -1,25 +1,14 @@
-h1= title
-br
+!!!html
+html
+    head
+        title= title
+        meta(http-equiv='X-UA-Compatible', content='IE=10')
+        link(rel='stylesheet', href='/stylesheets/reset.css')
+        link(rel='stylesheet', href='/stylesheets/style.css')
 
-table
-    tbody
-        each fashun in fashuns
-          tr
-            td #{fashun.name}
-            td #{fashun.image_path}
-            - var day   = fashun.Timestamp.getDate();
-            - var month = fashun.Timestamp.getMonth() + 1;
-            - var year  = fashun.Timestamp.getFullYear();
-            td #{month + "/" + day + "/" + year}
-            td 
-                a(href="fashun/#{fashun.RowKey}") view fashun
-              //img(src="#{fashun.imageURL}")
-hr
-form(action="/addfashun", method="post", enctype="multipart/form-data")
-  label Fashun Name: 
-  input(name="name", type="textbox")
 
-  label Fashun: 
-  input(name="image", type="file")
-  br
-  button(type="submit", class="btn") Save Fashun!
+    body(class='app')
+        a(class='banner-wrapper', href='/') 
+            .banner fashun
+        a(class='fb', href='/auth/facebook')
+            .fb_login_text Connect with Facebook

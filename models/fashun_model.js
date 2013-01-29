@@ -14,7 +14,7 @@ function FashunModel(storageClient, blobService, tableName, partitionKey) {
 	this.storageClient.createTableIfNotExists(tableName,
 		function tableCreated(err) {
 			if(err) {
-				throw error;
+				throw err;
 			}
 		});
 
@@ -22,7 +22,7 @@ function FashunModel(storageClient, blobService, tableName, partitionKey) {
 		{ publicAccessLevel : 'blob' },
 		function blobCreated(err) {
 			if(err){
-				throw error;
+				throw err;
 			}
 		});
 }
