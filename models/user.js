@@ -9,7 +9,6 @@ function UserModel(storageClient, tableName, partitionKey) {
 	this.tableName = tableName;
 	this.partitionKey = partitionKey;
 
-
 	this.storageClient.createTableIfNotExists(tableName,
 		function tableCreated(err) {
 			if(err) {
@@ -31,38 +30,37 @@ UserModel.prototype = {
 			});
 	},
 	
-	findById: function(id, callback) {
+	findById: function(profileId, callback) {
 		self = this;
-		var query = azure.TableQuery.select().from(self.tableName).where('id eq ?', id);
-
+		query = azure.TableQuery.select().from(self.tableName).where('profileId eq ?', profileId);
+		
 		self.find(query, function(err, entities) {
-			console.log(entities);
 			callback(err, entities[0]);
 		});
 	},
 
 	createUserIfNotExists: function(profile, done) {
 		self = this;
-		var query = azure.TableQuery.select().from(self.tableName).where('id eq ?', profile.id);
-
-		self.find(query, function(err, entities) {
-			if (err) done(err);
-			if (entities.length > 0) {
-				done(null, user.RowKey);
+		self.findById(profile.id, function(err, entities) {
+			if (err) {
+				done(err);
+			} else if (entities && entities.length > 0) {
+				done(null, entities);
 			} else {
 				var item = {
-					'RowKey': uuid(),
-					'PartitionKey': self.partitionKey,
-					'id': profile.id
+					'RowKey'       : uuid(),
+					'PartitionKey' : self.partitionKey,
+					'profileId'    : profile.id,
+					'displayName'  : profile.displayName,
+					'profile'	   : profile._raw
 				}
-				self.storageClient.insertEntity(self.tableName, item,
-					function entityInserted(err) {
-						debugger;
-						if (err) {
-							done(err);
-						}
+				self.storageClient.insertEntity(self.tableName, item, function (err) {
+					if (err) {
+						done(err);
+					} else {
 						done(null, item);
-					});
+					}
+				});
 			}
 		});
 	},

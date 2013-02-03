@@ -4,5 +4,6 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', {user: req.user, title: 'fashun'});
+	console.log(req.user);
+	res.render('index', {user: req.user, title: 'fashun'});
 };

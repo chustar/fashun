@@ -50,7 +50,6 @@ FashunModel.prototype = {
 			item.RowKey = uuid();
 			item.PartitionKey = self.partitionKey;
 			item.imageURL = self.blobService.getBlobUrl(blob.container, blob.blob).url();
-			console.log(item);
 			self.storageClient.insertEntity(self.tableName, item,
 				function entityInserted(error) {
 					debugger;

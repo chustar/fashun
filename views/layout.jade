@@ -6,13 +6,13 @@ html
         link(rel='stylesheet', href='/stylesheets/reset.css')
         link(rel='stylesheet', href='/stylesheets/style.css')
 
-
     body(class='app')
-        div(class='navbar navbar-fixed-top')
-            .navbar-inner
-                a(class='brand logo', href='/') fashun
-                if (user)
-                    a(class='brand menu', href='/user/fashuns') My Fashuns
-                .clear
+        table.navbar
+            tr
+               td
+                   a(class='brand logo', href='/') fashun
+               td(valign='bottom', align='right')
+                    if (user)
+                        a(class='user', href='/me') #{user.displayName}
         .container 
             block body

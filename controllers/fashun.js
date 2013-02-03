@@ -12,7 +12,6 @@ FashunController.prototype.getFashun = function(req, res) {
 	var query = azure.TableQuery.select().from(self.fashunModel.tableName).where('RowKey eq ?', req.params.rowkey);
 
 	self.fashunModel.find(query, function itemsFound(err, fashuns) {
-		console.log(fashuns);
 		res.render('fashun', {user: req.user, fashun: fashuns[0]});
 	});
 }
@@ -23,6 +22,15 @@ FashunController.prototype.getFashuns = function(req, res) {
 
 	self.fashunModel.find(query, function itemsFound(err, fashuns) {
 		res.render('fashuns', {user: req.user, title: 'Fashuns', fashuns: fashuns});
+	});
+}
+
+FashunController.prototype.getPopularFashuns = function(req, res) {
+	self = this;
+	var query = azure.TableQuery.select().from(self.fashunModel.tableName);
+
+	self.fashunModel.find(query, function itemsFound(err, fashuns) {
+		res.render('fashuns', {user: req.user, title: 'Popular Fashuns', fashuns: fashuns});
 	});
 }
 

@@ -8,7 +8,14 @@ html
 
 
     body(class='app')
-        a(class='banner-wrapper', href='/') 
-            .banner fashun
-        a(class='fb', href='/auth/facebook')
-            .fb_login_text Connect with Facebook
+        if (user)
+            .user_div
+                a(class='user', href='/me') #{user.displayName}
+                .clear
+
+        .banner fashun
+        if (user)
+            .banner_button.upload_text Upload New Fashun
+        else
+            a(class='banner_button', href='/auth/facebook')
+                .fb_login_text Connect with Facebook

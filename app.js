@@ -29,11 +29,12 @@ app.configure(function() {
     app.use(express.logger('dev'));
     app.use(express.bodyParser());
     app.use(express.methodOverride());
-//	app.use(express.session({ secret: 'secret' }));
-//	app.use(express.session({cookie: { path: '/', httpOnly: true, maxAge: null }, secret:'eeuqram'}));
+	app.use(express.cookieParser()); 
+	//app.use(express.session({ secret: 'secret' }));
+	app.use(express.session({cookie: { path: '/', httpOnly: true, maxAge: null }, secret:'eeuqram'}));
 
 	app.use(passport.initialize());
-//	app.use(passport.session());
+	app.use(passport.session());
 
 	app.use(app.router);
 	app.use(express.static(path.join(__dirname, 'public')));
@@ -42,7 +43,7 @@ app.configure(function() {
 var UserModel = require('./models/user');
 var userModel = new UserModel(
 		azure.createTableService(accountName, accountKey),
-		tableName,
+		"users",
 		partitionKey);
 
 var FashunModel = require('./models/fashun_model');
@@ -64,29 +65,29 @@ passport.use(new facebookStrategy({
 		callbackURL: "http://localhost:3000/auth/facebook/callback"
 	},
 	function(req, accessToken, refreshToken, profile, done) {
-		console.log(profile);
 		userModel.createUserIfNotExists(profile, done);
 	}
 ));
 
 passport.serializeUser(function(user, done) {
-  done(null, user.id);
+  done(null, user.profileId);
 });
 
-passport.deserializeUser(function(id, done) {
-  userModel.findById(id, function(err, user) {
-      done(err, user);
-    });
+passport.deserializeUser(function(profileId, done) {
+	userModel.findById(profileId, function(err, user) {
+		done(err, user);
+	});
 });
 
 app.get('/',                       controllers.index);
 app.get('/fashuns',                fashunController.getFashuns.bind(fashunController));
+app.get('/fashuns/popular',        fashunController.getPopularFashuns.bind(fashunController));
 app.get('/fashun/:rowkey',         fashunController.getFashun.bind(fashunController));
 app.post('/fashun/add',			   fashunController.addFashun.bind(fashunController));
 app.post('/fashun/update', 		   fashunController.updateFashun.bind(fashunController));
 
 app.get('/auth/facebook',		   passport.authenticate('facebook'));
-app.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect: '/' , failureRedirect: '/login' }));
+app.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login' }));
 
 app.get('/logout', 					function(req, res){ req.logout(); res.redirect('/'); });
 
