@@ -5,14 +5,19 @@ html
         meta(http-equiv='X-UA-Compatible', content='IE=10')
         link(rel='stylesheet', href='/stylesheets/reset.css')
         link(rel='stylesheet', href='/stylesheets/style.css')
+        link(rel="icon", type="image/png", href="/images/favicon.png")
 
     body(class='app')
-        table.navbar
-            tr
-               td
-                   a(class='brand logo', href='/') fashun
-               td(valign='bottom', align='right')
-                    if (user)
-                        a(class='user', href='/me') #{user.displayName}
+        - var index;
+        .navbar
+            if (index == null)
+                a(class='brand-logo small', href='/') fashun
+
+            if (user)
+                a(class='brand-button small user', href='/me') #{user.displayName}
+            else if(index == null)
+                a(class='brand-button small fb', href='/auth/facebook') Connect with Facebook
+            .clear
+
         .container 
             block body

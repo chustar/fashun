@@ -25,7 +25,6 @@ app.configure(function() {
     app.set('port', process.env.PORT || 3000);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
-    app.use(express.favicon());
     app.use(express.logger('dev'));
     app.use(express.bodyParser());
     app.use(express.methodOverride());
@@ -56,6 +55,10 @@ var fashunModel = new FashunModel(
 var FashunController = require('./controllers/fashun');
 var fashunController = new FashunController(fashunModel);
 
+var UserController = require('./controllers/user');
+var userController = new UserController(fashunModel);
+
+
 // Setup passport.
 var facebookStrategy = require('passport-facebook').Strategy;
 
@@ -79,12 +82,17 @@ passport.deserializeUser(function(profileId, done) {
 	});
 });
 
-app.get('/',                       controllers.index);
-app.get('/fashuns',                fashunController.getFashuns.bind(fashunController));
-app.get('/fashuns/popular',        fashunController.getPopularFashuns.bind(fashunController));
-app.get('/fashun/:rowkey',         fashunController.getFashun.bind(fashunController));
-app.post('/fashun/add',			   fashunController.addFashun.bind(fashunController));
-app.post('/fashun/update', 		   fashunController.updateFashun.bind(fashunController));
+app.get( '/', 						controllers.index);
+
+//app.get( '/fashuns', 				fashunController.getFashuns.bind(fashunController));
+app.get( '/fashuns/popular', 		fashunController.getPopularFashuns.bind(fashunController));
+app.get( '/fashuns/add', 		    fashunController.addFashunGet.bind(fashunController));
+app.post('/fashuns/add',			fashunController.addFashunPost.bind(fashunController));
+app.post('/fashuns/update/:rowkey', fashunController.updateFashun.bind(fashunController));
+app.get( '/fashuns/:rowkey',		fashunController.getFashun.bind(fashunController));
+
+app.get('/users/me',				userController.getMe.bind(userController));
+app.get('/users/:rowkey',		    userController.getUser.bind(userController));
 
 app.get('/auth/facebook',		   passport.authenticate('facebook'));
 app.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login' }));

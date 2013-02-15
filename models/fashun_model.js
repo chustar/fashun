@@ -43,20 +43,16 @@ FashunModel.prototype = {
 	addItem: function(item, callback) {
 		self = this;
 		//upload the image to blob store.
-		this.blobService.createBlockBlobFromFile("fashuns", item.image_name, item.image_path, function (err, blob) {
-			if (err) {
-				callback(err);
-			}
+		console.log(item);
+		this.blobService.createBlockBlobFromFile("fashuns", item.imageName, item.imagePath, function (err, blob) {
+			if (err) callback(err);
+
 			item.RowKey = uuid();
 			item.PartitionKey = self.partitionKey;
 			item.imageURL = self.blobService.getBlobUrl(blob.container, blob.blob).url();
 			self.storageClient.insertEntity(self.tableName, item,
 				function entityInserted(error) {
-					debugger;
-					if (error) {
-						callback(error);
-					}
-					callback(null);
+					callback(error, item.RowKey);
 				});
 			});
 	},

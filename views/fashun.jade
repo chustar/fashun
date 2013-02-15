@@ -1,4 +1,10 @@
-h1= fashun.name
-br
+extends layout
 
-img(src="#{fashun.imageURL}")
+block body
+    .image
+        h1.fashun-title= fashun.name
+
+        img(src="#{fashun.imageURL}")
+        .fashun-author
+            h1.fashun-author= fashun.userDisplayName
+            .clear

@@ -1,21 +1,9 @@
-!!!html
-html
-    head
-        title= title
-        meta(http-equiv='X-UA-Compatible', content='IE=10')
-        link(rel='stylesheet', href='/stylesheets/reset.css')
-        link(rel='stylesheet', href='/stylesheets/style.css')
-
-
-    body(class='app')
-        if (user)
-            .user_div
-                a(class='user', href='/me') #{user.displayName}
-                .clear
-
-        .banner fashun
-        if (user)
-            .banner_button.upload_text Upload New Fashun
-        else
-            a(class='banner_button', href='/auth/facebook')
-                .fb_login_text Connect with Facebook
+extends layout
+block body
+    .brand-logo.big fashun
+    if (user)
+        a(class='brand-button big upload', href='fashuns/add') Upload New Fashun
+        a(class='brand-button big browse', href='fashuns/popular') Browse Fashuns
+    else
+        a(class='brand-button big fb', href='/auth/facebook')
+            .fb_login_text Connect with Facebook

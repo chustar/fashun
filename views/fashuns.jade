@@ -3,13 +3,13 @@ block body
     each fashun in fashuns
         .fashun-div 
             .fashun-main
-                a(class='fashun-name', href="/fashun/#{fashun.RowKey}") #{fashun.name}
+                a(class='fashun-name', href="/fashuns/#{fashun.RowKey}") #{fashun.name}
                     - var day   = fashun.Timestamp.getDate();
                     - var month = fashun.Timestamp.getMonth() + 1;
                     - var year  = fashun.Timestamp.getFullYear();
             .fashun-meta
-                span.fashun-user chustar
-                span.fashun-date #{month + '/' + day + '/' + year}
+                span.fashun-user= fashun.userDisplayName
+                span.fashun-date= month + '/' + day + '/' + year
 
     //form(action="/addfashun", method="post", enctype="multipart/form-data")
       label Fashun Name: 
