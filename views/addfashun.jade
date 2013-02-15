@@ -1,0 +1,14 @@
+extends layout
+
+block body
+    form(action="/fashuns/add", method="post", enctype="multipart/form-data")
+        .name
+            label(for="name") Fashun Name
+            input(name="name", type="textbox")
+    
+        .path
+            label(for="image") Choose Image
+            input(name="image", type="file")
+
+        button(type="submit", class="brand-button big upload") Save Fashun!
+

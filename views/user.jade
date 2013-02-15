@@ -1,0 +1,14 @@
+extends layout
+block body
+    each fashun in fashuns
+        .fashun-div 
+            .fashun-main
+                a(class='fashun-name', href="/fashun/#{fashun.RowKey}") #{fashun.name}
+                    - var day   = fashun.Timestamp.getDate();
+                    - var month = fashun.Timestamp.getMonth() + 1;
+                    - var year  = fashun.Timestamp.getFullYear();
+                    - var hour  = fashun.Timestamp.getHours();
+                    - var minute  = fashun.Timestamp.getMinutes();
+                    - var second  = fashun.Timestamp.getSeconds();
+            .fashun-meta
+                span.fashun-date= month + '/' + day + '/' + year + ' @ ' + hour + ':' + (minute < 10 ? '0' : '') + minute + ':' + (second < 10 ? '0' : '') + second
