@@ -1,0 +1,3 @@
+[submodule "public/javascripts/image-tags"]
+	path = public/javascripts/image-tags
+	url = git@github.com:chustar/image-tags.git

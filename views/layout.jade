@@ -11,16 +11,17 @@ html
         block head
 
     body(class='app')
-        - var index;
-        .navbar
-            if (index == null)
-                a(class='brand-logo small', href='/') fashun
+        .content
+            - var index;
+            .navbar
+                if (index == null)
+                    a(class='brand-logo small', href='/') fashun
 
-            if (user)
-                a(class='brand-button small user', href='/me') #{user.displayName}
-            else if(index == null)
-                a(class='brand-button small fb', href='/auth/facebook') Connect with Facebook
-            .clear
+                if (user)
+                    a(class='brand-button small user', href='/me') #{user.displayName}
+                else if(index == null)
+                    a(class='brand-button small fb', href='/auth/facebook') Connect with Facebook
+                .clear
 
-        .container 
-            block body
+            .container 
+                block body

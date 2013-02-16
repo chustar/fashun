@@ -1,6 +1,7 @@
 extends layout
 
 block head
+    link(rel='stylesheet', href='/javascripts/image-tags/css/image-tags.css')
     script(src='/javascripts/image-tags/js/image-tags.js')
     script(src='/javascripts/fashun.js')
 
@@ -8,7 +9,10 @@ block body
     .image
         h1.fashun-title= fashun.name
 
-        img(src="#{fashun.imageURL}", id="target")
+        img(src="#{fashun.imageURL}")
         .fashun-author
             h1.fashun-author= fashun.userDisplayName
             .clear
+
+    script
+        $(".image").image_tag();
