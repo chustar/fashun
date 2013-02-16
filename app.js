@@ -45,7 +45,7 @@ var userModel = new UserModel(
 		"users",
 		partitionKey);
 
-var FashunModel = require('./models/fashun_model');
+var FashunModel = require('./models/fashun');
 var fashunModel = new FashunModel(
 		azure.createTableService(accountName, accountKey),
 		azure.createBlobService(accountName, accountKey),

@@ -1,10 +1,14 @@
 extends layout
 
+block head
+    script(src='/javascripts/image-tags/js/image-tags.js')
+    script(src='/javascripts/fashun.js')
+
 block body
     .image
         h1.fashun-title= fashun.name
 
-        img(src="#{fashun.imageURL}")
+        img(src="#{fashun.imageURL}", id="target")
         .fashun-author
             h1.fashun-author= fashun.userDisplayName
             .clear

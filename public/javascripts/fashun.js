@@ -1,0 +1,1 @@
+$("#target").image_tag();
