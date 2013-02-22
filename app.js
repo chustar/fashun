@@ -15,6 +15,7 @@ nconf.env()
     .file({ file: 'config.json'});
 
 var tableName    = nconf.get("TABLE_NAME"),
+	tagTableName = nconf.get("TAG_TABLE_NAME")
     partitionKey = nconf.get("PARTITION_KEY"),
     accountName  = nconf.get("STORAGE_NAME"),
     accountKey   = nconf.get("STORAGE_KEY");
@@ -52,8 +53,17 @@ var fashunModel = new FashunModel(
 		tableName,
 		partitionKey);
 
+var TagModel = require('./models/tag');
+var tagModel = new TagModel(
+		azure.createTableService(accountName, accountKey),
+		tableName,
+		partitionKey);
+
 var FashunController = require('./controllers/fashun');
-var fashunController = new FashunController(fashunModel);
+var fashunController = new FashunController(fashunModel, tagModel);
+
+var TagController = require('./controllers/tag');
+var tagController = new TagController(tagModel);
 
 var UserController = require('./controllers/user');
 var userController = new UserController(fashunModel);
@@ -90,6 +100,10 @@ app.get( '/fashuns/add', 		    fashunController.addFashunGet.bind(fashunControll
 app.post('/fashuns/add',			fashunController.addFashunPost.bind(fashunController));
 app.post('/fashuns/update/:rowkey', fashunController.updateFashun.bind(fashunController));
 app.get( '/fashuns/:rowkey',		fashunController.getFashun.bind(fashunController));
+
+app.post('/tags/add',				tagController.addTag.bind(tagController));
+app.post('/tags/get/:rowkey',		tagController.getTag.bind(tagController));
+app.post('/tags/get/:fashunRowKey',	tagController.getLinkedTags.bind(tagController));
 
 app.get('/users/me',				userController.getMe.bind(userController));
 app.get('/users/:rowkey',		    userController.getUser.bind(userController));

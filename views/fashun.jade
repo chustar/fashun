@@ -15,4 +15,17 @@ block body
             .clear
 
     script
-        $(".image").image_tag();
+        $('.image').image_tag({
+            tags: !{JSON.stringify(tags)},
+            callback: function(tag) {
+                console.log(tag)
+                tag.args.fashunRowKey = '#{fashun.RowKey}';
+                $.post('/tags/add', {
+                    'rowkey': '#{fashun.RowKey}',
+                    'tag': JSON.stringify(tag.args)
+                })
+                .done(function() {
+                    tag.riderbox.text('#{fashun.userDisplayName}');
+                });
+            }
+        });

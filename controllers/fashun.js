@@ -3,16 +3,20 @@ var azure = require('azure'),
 
 module.exports = FashunController;
 
-function FashunController(fashunModel) {
+function FashunController(fashunModel, tagModel) {
 	this.fashunModel = fashunModel;
+	this.tagModel = tagModel;
 }
 
 FashunController.prototype.getFashun = function(req, res) {
-	self = this;
-	var query = azure.TableQuery.select().from(self.fashunModel.tableName).where('RowKey eq ?', req.params.rowkey);
+	that = this;
+	var query = azure.TableQuery.select().from(that.fashunModel.tableName).where('RowKey eq ?', req.params.rowkey);
 
-	self.fashunModel.find(query, function itemsFound(err, fashuns) {
-		res.render('fashun', {user: req.user, title: fashuns[0].name, fashun: fashuns[0]});
+	that.fashunModel.find(query, function itemsFound(err, fashuns) {
+		var query = azure.TableQuery.select().from(that.tagModel.tableName).where('fashunRowKey eq ?', req.params.rowkey);
+		that.tagModel.find(query, function itemsFound(err, tags) {
+			res.render('fashun', {user: req.user, title: fashuns[0].name, fashun: fashuns[0], tags: tags});
+		});
 	});
 }
 
