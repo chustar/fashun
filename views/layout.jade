@@ -18,7 +18,7 @@ html
                     a(class='brand-logo small', href='/') fashun
 
                 if (user)
-                    a(class='brand-button small user', href='/me') #{user.displayName}
+                    a(class='brand-button small user', href='/users/me') #{user.displayName}
                 else if(index == null)
                     a(class='brand-button small fb', href='/auth/facebook') Connect with Facebook
                 .clear
