@@ -12,8 +12,6 @@ users 		= require './controllers/user'
 
 nconf.env().file({file: 'config.json'})
 
-tableName    = nconf.get 'TABLE_NAME'
-tagTableName = nconf.get 'TAG_TABLE_NAME'
 partitionKey = nconf.get 'PARTITION_KEY'
 accountName  = nconf.get 'STORAGE_NAME'
 accountKey   = nconf.get 'STORAGE_KEY'
@@ -40,7 +38,7 @@ app.configure ->
 UserModel = require('./models/user')
 userModel = new UserModel(
 	azure.createTableService(accountName, accountKey),
-	"users",
+    nconf.get('USER_TABLE_NAME'),
 	partitionKey
 )
 
@@ -48,14 +46,14 @@ FashunModel = require('./models/fashun')
 fashunModel = new FashunModel(
 	azure.createTableService(accountName, accountKey),
 	azure.createBlobService(accountName, accountKey),
-	tableName,
+	nconf.get('FASHUN_TABLE_NAME'),
 	partitionKey
 )
 
 TagModel = require('./models/tag')
 tagModel = new TagModel(
 	azure.createTableService(accountName, accountKey),
-	tagTableName,
+	nconf.get('TAG_TABLE_NAME'),
 	partitionKey
 )
 
