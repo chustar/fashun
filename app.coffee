@@ -75,7 +75,7 @@ facebookStrategy = require('passport-facebook').Strategy
 passport.use(new facebookStrategy({
 		clientID: nconf.get("FB_APP_ID"),
 		clientSecret: nconf.get("FB_APP_SECRET"),
-		callbackURL: "http://localhost:3000/auth/facebook/callback"
+		callbackURL: "/auth/facebook/callback"
 	},
 	(req, accessToken, refreshToken, profile, done) ->
 		userModel.createUserIfNotExists(profile, done)
