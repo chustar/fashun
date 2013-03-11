@@ -1,11 +1,16 @@
 extends layout
 
 block body
-    .brand-logo.big fashun
-    if (user)
-        a(class='brand-button big upload', href='fashuns/add') Upload New Fashun
-    else
+    if (!user)
+        .brand-logo.big fashun
+
+    a(class='brand-button big browse', href='fashuns/popular') Browse Fashuns
+    
+    if (!user)
         a(class='brand-button big fb', href='/auth/facebook')
             .fb_login_text Connect with Facebook
-    a(class='brand-button big browse', href='fashuns/popular') Browse Fashuns
+    else
+        .parent
+        .target(id="target") drop images here
 
+        script(src='/javascripts/upload.js')

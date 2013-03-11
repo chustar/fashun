@@ -93,8 +93,7 @@ passport.deserializeUser((profileId, done) ->
 app.get  '/', 						controllers.index
 
 app.get  '/fashuns/popular', 		fashunController.getPopularFashuns.bind(fashunController)
-app.get  '/fashuns/add', 		    fashunController.addFashunGet.bind(fashunController)
-app.post '/fashuns/add',			fashunController.addFashunPost.bind(fashunController)
+app.post '/fashuns/add',			fashunController.addFashun.bind(fashunController)
 app.post '/fashuns/update/:rowkey', fashunController.updateFashun.bind(fashunController)
 app.get  '/fashuns/:rowkey',		fashunController.getFashun.bind(fashunController)
 

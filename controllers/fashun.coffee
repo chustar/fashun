@@ -25,37 +25,32 @@ class FashunController
                 title: "Fashuns"
                 fashuns: fashuns
 
-
-
     getPopularFashuns: (req, res) ->
         query = azure.TableQuery.select().from(@fashunModel.tableName)
         @fashunModel.find query, itemsFound = (err, fashuns) ->
-            console.log(fashuns)
             res.render "fashuns",
                 user: req.user
                 title: "Popular Fashuns"
                 fashuns: fashuns
 
-     addFashunGet: (req, res) ->
-         res.redirect "/"  unless req.user
-         res.render "addfashun",
-             user: req.user
-             title: "Add New Fashun"
+     addFashun: (req, res) ->
+         if req.user
+             fashunObj =
+                 name: req.body.name
+                 imageName: req.files.file.filename
+                 imagePath: req.files.file.path
+                 userRowKey: req.user.RowKey
+                 userDisplayName: req.user.displayName
 
+             @fashunModel.addItem fashunObj, itemAdded = (err, rowkey) ->
+                 throw err  if err
+                 res.writeHead 200
+                 res.write "/fashuns/" + rowkey
+                 res.end()
+         else
+             res.writeHead 301
+             res.end()
 
-     addFashunPost: (req, res) ->
-         res.redirect "/"  unless req.user
-
-         fashunObj =
-             name: req.body.name
-             imageName: req.files.image.name
-             imagePath: req.files.image.path
-             userRowKey: req.user.RowKey
-             userDisplayName: req.user.displayName
-
-         @fashunModel.addItem fashunObj, itemAdded = (err, rowkey) ->
-             throw err  if err
-             res.redirect "/fashuns/" + rowkey
 
     updateFashun: (req, res) ->
         fashunObj =

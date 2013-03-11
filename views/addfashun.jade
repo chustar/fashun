@@ -1,14 +1,15 @@
 extends layout
 
 block body
-    form(action="/fashuns/add", method="post", enctype="multipart/form-data")
+    form(id="form", action="/fashuns/add", method="post", enctype="multipart/form-data")
         .name
             label(for="name") Fashun Name
             input(name="name", type="textbox")
-    
-        .path
-            label(for="image") Choose Image
-            input(name="image", type="file")
+
+        .target(id="target") drop images here
+
+        input(type="file", id="file", name="files[]")
 
         button(type="submit", class="brand-button big upload") Save Fashun!
 
+    script(src='/javascripts/upload.js')

@@ -7,6 +7,7 @@ html
         link(rel='stylesheet', href='/stylesheets/style.css')
         link(rel="icon", type="image/png", href="/images/favicon.png")
         script(src='/javascripts/jquery.js')
+        script(src='/javascripts/upload.js')
 
         block head
 
@@ -14,12 +15,12 @@ html
         .content
             - var index;
             .navbar
-                if (index == null)
-                    a(class='brand-logo small', href='/') fashun
-
                 if (user)
+                    a(class='brand-logo small', href='/') fashun
                     a(class='brand-button small user', href='/users/me') #{user.displayName}
+
                 else if(index == null)
+                    a(class='brand-logo small', href='/') fashun
                     a(class='brand-button small fb', href='/auth/facebook') Connect with Facebook
                 .clear
 
