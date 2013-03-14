@@ -135,7 +135,7 @@ a, a:visited, a:link {
 	padding: 10px 16px;
     box-shadow: 3px 3px 0px rgba(50, 0, 0, 0.8);
 }
-.fashun-author {
+h1.fashun-author {
     direction: rtl;
 	margin-top: -2px; /* hacky! */
     box-shadow: -3px -3px 0px rgba(50, 0, 0, 0.8);
