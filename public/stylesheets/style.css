@@ -135,9 +135,12 @@ a, a:visited, a:link {
 	padding: 10px 16px;
     box-shadow: 3px 3px 0px rgba(50, 0, 0, 0.8);
 }
-h1.fashun-author {
+/* To avoid overriding rules form above. Seriuosly css, wtf? why can't i have real inheritance instead of this weird override stuff? */
+.fashun-author {
     direction: rtl;
 	margin-top: -2px; /* hacky! */
+}
+h1.fashun-author {
     box-shadow: -3px -3px 0px rgba(50, 0, 0, 0.8);
 }
 button {
