@@ -17,6 +17,7 @@ block body
     script
         $('.image').image_tag({
             tags: !{JSON.stringify(tags)},
+            getter: function(tag) { return tag.userDisplayName; },
             callback: function(tag) {
                 console.log(tag)
                 tag.args.fashunRowKey = '#{fashun.RowKey}';

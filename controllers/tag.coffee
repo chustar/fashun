@@ -19,7 +19,7 @@ class TagController
         self = this
         if req.user
             tagObj = JSON.parse(req.body.tag)
-            tagObj.userDisplayName = req.user.userDisplayName
+            tagObj.userDisplayName = req.user.displayName
             @tagModel.addItem tagObj, (err, rowkey) ->
                 throw err if err
                 res.writeHead 200
