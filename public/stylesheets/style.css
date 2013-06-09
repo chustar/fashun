@@ -109,7 +109,10 @@ a, a:visited, a:link {
 	font-size: 28px;
 	padding: 8px 12px;
 }
-.fahsun-name {
+a.fashun-name, a.fashun-name:visited, a.fashun-name:link {
+	color: #eee;
+}
+a.fahsun-name {
 	color: #eee;
 	text-decoration: none;
 	display: table;
