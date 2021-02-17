@@ -6,14 +6,11 @@
     "start": "node server.js"
   },
   "dependencies": {
-	 "coffee-script" : "*",
-	 "async"         : "~0.1.22",
-	 "azure"         : "~0.6.9",
-	 "express"       : "3.1.0",
-	 "jade"          : "*",
-	 "nconf"         : "~0.6.7",
-	 "node-uuid"     : "~1.4.0",
-     "passport"      : "*",
-     "passport-facebook" : "*"
+    "coffee-script": "^1.12",
+    "async": "^3.2.0",
+    "azure": "^2.3.1-preview",
+    "express": "^4.17.1",
+    "pug": "^3.0.0",
+    "nconf": "^0.11.2"
   }
 }
