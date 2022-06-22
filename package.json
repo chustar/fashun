@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "coffee-script": "^1.12",
-    "async": "^3.2.0",
+    "async": "^3.2.2",
     "azure": "^2.3.1-preview",
     "express": "^4.17.1",
     "pug": "^3.0.0",
