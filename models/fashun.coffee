@@ -1,4 +1,4 @@
-azure = require "azure"
+azure = require('../lib/azure-compat')
 uuid  = require "node-uuid"
 
 class FashunModel

@@ -1,4 +1,4 @@
-azure = require("azure")
+azure = require('../lib/azure-compat')
 async = require("async")
 
 class TagController
