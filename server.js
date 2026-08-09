@@ -1,2 +1,2 @@
-require ('coffee-script')
+require('coffeescript/register')
 require ('./app')
