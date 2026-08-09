@@ -1,5 +1,5 @@
 # External dependencies.
-azure     = require 'azure'
+azure     = require './lib/azure-compat'
 express   = require 'express'
 http      = require 'http'
 nconf     = require 'nconf'
