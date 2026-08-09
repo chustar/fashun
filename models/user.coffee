@@ -1,5 +1,5 @@
 azure = require("azure")
-uuid  = require("node-uuid")
+uuid = require("uuid").v4
 
 class UserModel
     constructor: (storageClient, tableName, partitionKey) ->
