@@ -6,11 +6,11 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "coffee-script": "^1.12",
     "async": "^3.2.2",
-    "azure": "^2.3.1-preview",
+    "azure": "^0.7.18",
+    "coffee-script": "^1.12",
     "express": "^4.17.3",
-    "pug": "^3.0.1",
-    "nconf": "^0.11.4"
+    "nconf": "^0.11.4",
+    "pug": "^3.0.1"
   }
 }
